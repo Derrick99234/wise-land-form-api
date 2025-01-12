@@ -91,7 +91,6 @@ export class MailerService {
                       list-style-type: square;
                     "
                   >
-                    <li>🚍 Your assigned bus route will be shared with you shortly.</li>
                     <li>📅 Please ensure you arrive at the pickup point on time.</li>
                     <li>
                       📞 For any questions, feel free to contact us at
@@ -105,7 +104,6 @@ export class MailerService {
                   </p>
                 </div>
 
-                <!-- Footer -->
                 <div
                   style="
                     background-color: #f9f9f9;
