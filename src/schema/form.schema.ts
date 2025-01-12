@@ -9,6 +9,9 @@ export class Form {
   phone: string;
 
   @Prop({ required: true })
+  email: string;
+
+  @Prop({ required: true })
   pickUpPoint: string;
 
   @Prop()

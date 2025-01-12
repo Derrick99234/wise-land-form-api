@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateFormDto {
     @IsString()
@@ -12,6 +12,10 @@ export class CreateFormDto {
     @IsString()
     @IsNotEmpty()
     comment: string;
+
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
 
     @IsString()
     @IsNotEmpty()
