@@ -1,5 +1,4 @@
 interface WelcomeMessageType {
-    fullNames: string;
-    email: string;
-    phone: string;
+  fullNames: string;
+  email: string;
 }

@@ -7,18 +7,23 @@ import { MailerService } from '../mailer/mailer.service';
 
 @Injectable()
 export class FormService {
-    constructor(
-        @InjectModel(Form.name) private formModal: Model<Form>,
-        private mailerService: MailerService,
-    ) {}
+  constructor(
+    @InjectModel(Form.name) private formModal: Model<Form>,
+    private mailerService: MailerService,
+  ) {}
 
-    async createForm(createFormDto: CreateFormDto) {
-        try {
-            const form = new this.formModal(createFormDto);
-            await this.mailerService.sendWelcomeMessage({email: createFormDto.email, fullNames: createFormDto.fullNames, phone: createFormDto.phone});
-            return form.save();
-        } catch (error) {
-            throw new InternalServerErrorException(`Error while saving form data: ${error}`);
-        }
+  async createForm(createFormDto: CreateFormDto) {
+    try {
+      const form = new this.formModal(createFormDto);
+      await this.mailerService.sendWelcomeMessage({
+        email: createFormDto.email,
+        fullNames: createFormDto.fullNames,
+      });
+      return form.save();
+    } catch (error) {
+      throw new InternalServerErrorException(
+        `Error while saving form data: ${error}`,
+      );
     }
+  }
 }

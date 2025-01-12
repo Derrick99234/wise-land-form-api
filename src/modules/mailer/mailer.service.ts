@@ -20,86 +20,109 @@ export class MailerService {
   });
 
   async sendWelcomeMessage(welcomeMessage: WelcomeMessageType) {
-    const { fullNames, email, phone } = welcomeMessage;
+    const { fullNames, email } = welcomeMessage;
     try {
       await this.transporter.sendMail({
         from: this.configService.get<string>('MAIL_USER'),
         to: email,
         subject: 'Welcome to Your Free Ride to Work!',
-        html: `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wise land form</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
+        html: `
+         <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Welcome Email</title>
+            </head>
+            <body
+              style="
+                background-color: #f4f4f4;
+                font-family: Arial, sans-serif;
+                padding: 20px;
+                margin: 0;
+              "
+            >
+              <div
+                style="
+                  max-width: 600px;
+                  margin: 0 auto;
+                  background-color: #ffffff;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                  overflow: hidden;
+                "
+              >
+                <!-- Header -->
+                <div
+                  style="
+                    background-color: #081b31;
+                    color: #ffffff;
+                    text-align: center;
+                    padding: 20px;
+                  "
+                >
+                  <img
+                    src="https://thumbs.dreamstime.com/b/white-tour-bus-10177874.jpg"
+                    alt="Bus Icon"
+                    style="height: 50px; margin-bottom: 10px"
+                  />
+                  <h1 style="font-size: 24px; margin: 0; font-weight: bold">
+                    Welcome to Your Free Ride to Work!
+                  </h1>
+                </div>
 
-      body {
-        background-color: rgb(231, 233, 239);
-        padding: 25px;
-      }
-      .cname {
-        word-spacing: 8px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1.3rem;
-      }
+                <!-- Content -->
+                <div style="padding: 20px">
+                  <p style="font-size: 14px; color: #333333; line-height: 1.6">
+                    Dear <strong>${fullNames}</strong>,
+                  </p>
+                  <p style="font-size: 14px; color: #333333; line-height: 1.6">
+                    We're thrilled to welcome you to our
+                    <strong>Free Bus-to-Work Service</strong>! Our mission is to make your
+                    daily commute stress-free, comfortable, and enjoyable.
+                  </p>
+                  <p style="font-size: 14px; color: #333333; line-height: 1.6">
+                    Here’s everything you need to know to get started:
+                  </p>
+                  <ul
+                    style="
+                      font-size: 16px;
+                      color: #333333;
+                      line-height: 1.6;
+                      list-style-type: square;
+                    "
+                  >
+                    <li>🚍 Your assigned bus route will be shared with you shortly.</li>
+                    <li>📅 Please ensure you arrive at the pickup point on time.</li>
+                    <li>
+                      📞 For any questions, feel free to contact us at
+                      <a href="tel:+2347038991962" style="color: #002a5e"
+                        >+2347038991962</a
+                      >.
+                    </li>
+                  </ul>
+                  <p style="font-size: 14px; color: #333333; line-height: 1.6">
+                    Thank you for joining us. We’re excited to have you on board!
+                  </p>
+                </div>
 
-      .container {
-        background-color: white;
-        padding: 20px;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-          sans-serif;
-        font-family: sans-serif;
+                <!-- Footer -->
+                <div
+                  style="
+                    background-color: #f9f9f9;
+                    text-align: center;
+                    padding: 15px;
+                    border-top: 1px solid #dddddd;
+                  "
+                >
+                  <p style="font-size: 14px; color: #666666; margin: 10px 0 0">
+                    © 2025 Free Ride to Work, All Rights Reserved.
+                  </p>
+                </div>
+              </div>
+            </body>
+          </html>
 
-        h1 {
-          color: rgb(2, 15, 78);
-          font-size: 1.2rem;
-          margin-bottom: 30px;
-          text-align: center;
-        }
-
-        h2 {
-          font-size: 1.2rem;
-          font-weight: 500;
-        }
-
-        figure {
-          text-align: center;
-          padding: 0;
-          margin: 0;
-        }
-
-        p {
-          margin-block: 10px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <figure>
-        <img src="../images/bus-p.png" alt="" height="40" />
-      </figure>
-      <h1>
-        Welcome to Your <br />
-        <span class="cname">Free Ride to Work!</span>
-      </h1>
-      <p>
-        Thank you for joining our Free Bus-to-Work Service! We’re excited to
-        have you on board and look forward to making your daily commute
-        stress-free, comfortable, and convenient.
-      </p>
-      <p>Here&apos;s everything you need to know to get started:</p>
-    </div>
-  </body>
-</html>
-
-                    `,
+          `,
       });
     } catch (error) {
       throw new InternalServerErrorException(
