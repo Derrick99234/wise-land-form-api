@@ -23,7 +23,7 @@ export class MailerService {
     const { fullNames, email } = welcomeMessage;
     try {
       await this.transporter.sendMail({
-        from: this.configService.get<string>('MAIL_USER'),
+        from: `Your Free Ride to Work! ${this.configService.get<string>('MAIL_USER')}`,
         to: email,
         subject: 'Welcome to Your Free Ride to Work!',
         html: `
